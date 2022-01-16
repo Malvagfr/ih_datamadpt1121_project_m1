@@ -43,7 +43,7 @@ if __name__ == "__main__":
      coordinates_bicimad=bicimad_stations.apply(lambda x: to_mercator(x['lat_finish'],x['long_finish']), axis=1)
      bicimad_stations["coordinates_bicimad"]=coordinates_bicimad
      bicimad_stations.drop(['long_finish','lat_finish'], axis=1, inplace=True)
-     print(bicimad_stations)
+     bicimad_stations.to_csv('./data/bicimad_stations.csv')
 
      #EXTRACTING RAW DATA AND CALCULATING COORDINATES - Interesting Points
      url_interest_points = 'https://datos.madrid.es/egob/catalogo/300356-0-monumentos-ciudad-madrid.json'
@@ -59,11 +59,12 @@ if __name__ == "__main__":
      coordinates_interest_points=interest_points.apply(lambda x: to_mercator(x['lat_start'],x['long_start']), axis=1)
      interest_points["coordinates_interest_points"]=coordinates_interest_points
      interest_points.drop(['long_start','lat_start'], axis=1, inplace=True)
-     print(interest_points)
+     interest_points.to_csv('./data/interest_points.csv')
 
      #JOINING DATA
      interest_points_bicimad = bicimad_stations.assign(key=0).merge(interest_points.assign(key=0), how='left', on = 'key')
      interest_points_bicimad.drop('key', axis=1, inplace=True)
+     interest_points_bicimad.to_csv('./data/interest_points_bicimad.csv')
 
      #CALCULATING DISTANCE
      distance=interest_points_bicimad.apply(lambda x: distance_meters_from_mercator(x['coordinates_interest_points'],x['coordinates_bicimad']), axis=1)
