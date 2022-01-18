@@ -22,7 +22,12 @@ import requests
 #allow users to select multiple functionalities
 import argparse
 
+#allowing users to input interest points with flexibility 
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
 
+#for nice displaying
+from tabulate import tabulate
 
 
 # Script functions - calculate distance
@@ -142,8 +147,15 @@ def nearest_station_all_places():
 
 def nearest_station_specific_place(place):
     nearest_BiciMAD_station=pd.read_csv('./data/nearest_BiciMAD_station.csv')
-    nearest_BiciMAD_station_filtered=nearest_BiciMAD_station[nearest_BiciMAD_station["Place of interest"]==place]
-    nearest_BiciMAD_station_filtered.to_csv('./data/nearest_BiciMAD_station_filtered.csv')
+    def compare_strings(place,x):
+        return fuzz.ratio(place,x)
+    similarity=nearest_BiciMAD_station.apply(lambda x: compare_strings(x['Place of interest'],place), axis=1)
+    nearest_BiciMAD_station["similarity"]=similarity
+    nearest_BiciMAD_station_filtered=nearest_BiciMAD_station[(nearest_BiciMAD_station["similarity"]>60)]
+    print(tabulate(nearest_BiciMAD_station_filtered, headers='keys', tablefmt='psql'))
+    #nearest_BiciMAD_station_filtered=nearest_BiciMAD_station[nearest_BiciMAD_station["Place of interest"]==place]
+    #nearest_BiciMAD_station_filtered.to_csv('./data/nearest_BiciMAD_station_filtered.csv')
+
     return nearest_BiciMAD_station_filtered
     
 
