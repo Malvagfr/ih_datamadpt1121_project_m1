@@ -4,7 +4,12 @@
 
 # __ih_datamadpt1121_project_m1__
 
-Ironhack Madrid - Data Analytics Part Time - November 2021 - Project Module 1
+- This project is part of Ironhack Madrid - Data Analytics Part Time - November 2021 - Project Module 1
+
+- The project is about calculating the nearest BiciMad station to different Interesting Points in Madrid city
+
+## **Objectives:**
+
 
 ## **Data:**
 
