@@ -21,7 +21,7 @@ from tabulate import tabulate           #for nice displaying by console
 #allow users to select between 2 different functionalities
 def argument_parser():
     parser = argparse.ArgumentParser(description='Set operation type')
-    parser.add_argument("-f", "--function", help="Please select: 'all_points' Returns a table with the nearest BiciMAD Station of all Place of interest  or 'specific_point' Returns a table with the nearest BiciMAD Station of a specific Place of interest" ,type=str)
+    parser.add_argument("-f", "--function", help="Please select: 'all_points' for getting a table with the nearest BiciMAD Station of all Place of interest  or 'specific_point' for getting table with the nearest BiciMAD Station of a specific Place of interest" ,type=str)
     args = parser.parse_args()
     return args
 

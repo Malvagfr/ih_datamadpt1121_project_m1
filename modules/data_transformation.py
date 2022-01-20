@@ -52,5 +52,5 @@ def get_near_station(bicimad_stations,dataframe):
     nearest_BiciMAD_station['distance(m)']=nearest_BiciMAD_station['distance(m)'].round(2)
 
     #Saving CSV
-    nearest_BiciMAD_station.to_csv('./data/output/nearest_BiciMAD_station.csv')
+    nearest_BiciMAD_station.to_csv('./data/nearest_BiciMAD_station.csv')
     return nearest_BiciMAD_station

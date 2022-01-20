@@ -54,7 +54,7 @@ def get_bicimad_info():
     bicimad_stations.drop(['long_finish','lat_finish'], axis=1, inplace=True)
 
     #Storing dataframe
-    bicimad_stations.to_csv('./data/intermediate/bicimad_stations_clean.csv')
+    bicimad_stations.to_csv('./data/bicimad_stations_clean.csv')
     return bicimad_stations
 
 
@@ -81,5 +81,5 @@ def get_interest_points_info():
     interest_points=interest_points[interest_points.long_start.notnull()]
     
     #Saving CSV
-    interest_points.to_csv('./data/intermediate/interest_points.csv')
+    interest_points.to_csv('./data/interest_points.csv')
     return interest_points
