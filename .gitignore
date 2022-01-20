@@ -109,3 +109,6 @@ venv.bak/
 
 # Files and folders
 credentials/
+
+#csv files 
+*.csv
