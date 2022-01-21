@@ -13,6 +13,6 @@ def get_specific_interest_point(dataframe,input_var):
     dataframe["similarity"]=similarity
     specific_interest_point=dataframe[dataframe["similarity"]>80]
     if specific_interest_point.empty:
-        print('----------------------- We could not find the place of interest, find here comething similar -----------------------')
+        print('----------------------- We could not find the place of interest, find here something similar -----------------------')
         specific_interest_point=dataframe[dataframe['similarity'] == dataframe["similarity"].max()] 
     return specific_interest_point
