@@ -9,7 +9,7 @@ from modules import geo_calculations as geo
 
 ################################################# get bicimad stations information from API #####################################  
 def get_bicimad_info():
-    print('--//--- Taking BiciMAD stations info from API ---//--')
+    print('----------------------- 2. Getting BiciMAD stations info from API -----------------------')
     # getting token
     login_url = 'https://openapi.emtmadrid.es/v1/mobilitylabs/user/login/'
     login_headers = {'email': 'malva.gonzalez@ironhack.com','password': 'Bicimad2022'}
@@ -60,7 +60,7 @@ def get_bicimad_info():
 
 ################################################# get Interesting Points info from API ##############################################
 def get_interest_points_info():
-    print('--//--- Taking Interesting Points info from API ---//--')
+    print('----------------------- 3a. Getting Interesting Points info from API -----------------------')
     #Extracting raw data - Interesting Points
     #Defining public url for accesing to the datasets
     url_interest_points = 'https://datos.madrid.es/egob/catalogo/300356-0-monumentos-ciudad-madrid.json'
@@ -73,7 +73,8 @@ def get_interest_points_info():
     interest_points=interest_points[["title","address.street-address","location.latitude","location.longitude"]]
     
     #Renaming and adding columns needed
-    interest_points = interest_points.rename(columns={'title': 'Place of interest', 'address.street-address': 'Place address','location.latitude': 'lat_start','location.longitude': 'long_start'})
+    interest_points = interest_points.rename(columns={'title': 'Place of interest', 'address.street-address': 'Place address',
+    'location.latitude': 'lat_start','location.longitude': 'long_start'})
     interest_points["Type of place"] = "Monumentos de la ciudad de Madrid" 
 
     #Cleaning the dataframe (excluding rows without latitude or longitude information)

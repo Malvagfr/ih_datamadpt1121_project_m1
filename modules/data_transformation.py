@@ -8,6 +8,7 @@ from modules import geo_calculations as geo
 
 ###################################################### for calculating interest points distance ########################################
 def get_interest_points_info_coordinades(dataframe):
+    print('----------------------- 4. Getting Place of interest coordinades -----------------------')
     #Calculating coordinades
     dataframe[["long_start", "lat_start"]] = dataframe[["long_start", "lat_start"]].apply(pd.to_numeric)
     coordinates_interest_points=dataframe.apply(lambda x: geo.to_mercator(x['lat_start'],x['long_start']), axis=1)
@@ -24,7 +25,7 @@ def get_interest_points_info_coordinades(dataframe):
 
 ###################################################### calculating nearest station ####################################################
 def get_near_station(bicimad_stations,dataframe):
-    print('--//--- Calculating nearest station ---//--')
+    print('----------------------- 5. Getting nearest station -----------------------')
     #Joining data
     interest_points_bicimad = bicimad_stations.assign(key=0).merge(dataframe.assign(key=0), how='left', on = 'key')
     interest_points_bicimad.drop('key', axis=1, inplace=True)
@@ -48,7 +49,7 @@ def get_near_station(bicimad_stations,dataframe):
     nearest_BiciMAD_station=nearest_BiciMAD_station.reset_index()
     column_names = ["Place of interest", "Type of place", "Place address","BiciMAD station","Station location","distance","dock_bikes","free_bases"]
     nearest_BiciMAD_station = nearest_BiciMAD_station.reindex(columns=column_names)
-    nearest_BiciMAD_station = nearest_BiciMAD_station.rename(columns={'dock_bikes': 'bikes availability','distance': 'distance(m)','free_bases': 'bases availability'})
+    nearest_BiciMAD_station = nearest_BiciMAD_station.rename(columns={'dock_bikes': 'free bikes','distance': 'distance(m)','free_bases': 'free bases'})
     nearest_BiciMAD_station['distance(m)']=nearest_BiciMAD_station['distance(m)'].round(2)
 
     #Saving CSV

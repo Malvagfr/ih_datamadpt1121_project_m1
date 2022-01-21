@@ -1,4 +1,2 @@
-,Place of interest,Type of place,Place address,BiciMAD station,Station location,distance(m),bikes availability,bases availability
-0,Oso y Madroño,Monumentos de la ciudad de Madrid,C Barros 16,Concordia,Calle Arroyo del Olivar nº 6,2021.17,12,10
-1,Oso y Madroño,Monumentos de la ciudad de Madrid,CALLE PRINCIPE DE VERGARA 140,María Francisca 1,Calle María Francisca nº 1,70.51,4,10
-2,Oso y Madroño,Monumentos de la ciudad de Madrid,C Carmen ,Puerta del Sol A,Puerta del Sol nº 1,75.0,17,9
+,Place of interest,Type of place,Place address,BiciMAD station,Station location,distance(m),free bikes,free bases
+0,Gallia,Monumentos de la ciudad de Madrid,C Guzmán el Bueno 133,San Francisco de Sales,Calle General Ampudia nº 2,229.43,6,17
