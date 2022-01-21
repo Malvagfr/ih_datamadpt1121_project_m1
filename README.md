@@ -28,7 +28,7 @@ By using a python app (data pipeline) for getting all data sources and provide r
 - **all_points**: provides a list with all interest points and the nearest bicimad station (also with the distance, both addresses and number of free bikes and free bases).
 - **specific_point**: gets a interest point provided by the user and returns the interest points with similar title (depending on the user accurate this can return more than one place or even none). Again with the nearest bicimad station (also with the distance, both addresses and number of free bikes and free bases).
 
--  They need to include *python main_script.py -h* for the help and *python main_script.py -h <<option>>* for executing the program.
+-  They need to include *python main_script.py -h* for the help and *python main_script.py -h < option > for executing the program.
 
 - They get a table like the following and a csv stored in data/results folder: *
 
@@ -36,7 +36,7 @@ By using a python app (data pipeline) for getting all data sources and provide r
 |---------|----------|-------|------------|----------|-------|------------|----------|
 | A los abuelos  | Monumentos de la ciudad de Madrid | C Alicún | Manuel Caldeiro | Paseo de la Castellana nº 298 |2633.11 |  9 |  15 |
 
-* This example is for **specific_point** option 
+*This example is for **specific_point** option 
 
 ## **🗄 Folder structure:**
 ```
