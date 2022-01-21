@@ -51,7 +51,7 @@ def main(arguments):
     print(tabulate(result, headers='keys', tablefmt='psql'))
     print('\n')
     print('----------------------- 6. closing application -----------------------')
-    print('----------------------- Find your results in /data/nearest_BiciMAD_station.csv -----------------------')
+    print('----------------------- Find your results also in /data/results/nearest_BiciMAD_station.csv -----------------------')
 
 ###################################################### Pipeline execution #####################################################
 if __name__ == '__main__':
