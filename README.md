@@ -28,7 +28,7 @@ By using a python app (data pipeline) for getting all data sources and provide r
 - **all_points**: provides a list with all interest points and the nearest bicimad station (also with the distance, both addresses and number of free bikes and free bases).
 - **specific_point**: gets a interest point provided by the user and returns the interest points with similar title (depending on the user accurate this can return more than one place or even none). Again with the nearest bicimad station (also with the distance, both addresses and number of free bikes and free bases).
 
--  They need to include *python main_script.py -h* for the help and *python main_script.py -h < option > for executing the program.
+-  They need to include *python main_script.py -h* for the help and *python main_script.py -f < option > for executing the program.
 
 - They get a table like the following and a csv stored in data/results folder: *
 
@@ -58,10 +58,10 @@ By using a python app (data pipeline) for getting all data sources and provide r
         └── results
  ```
 
-- data: for storing intermediate and final data (in csv so it’s easy to access, storing intermediate data is helpful for testing purposes.)
-- modules: includes python scripts where functions are defined.
-- notebooks: sometimes using jupyter notebook for developing is helpful, but this files are not part of the final project.
-- main_script.py: this file includes the ejecutable part and is related with all modules files.
+- **data**: for storing intermediate and final data (in csv so it’s easy to access, storing intermediate data is helpful for testing purposes.)
+- **modules**: includes python scripts where functions are defined.
+- **notebooks**: sometimes using jupyter notebook for developing is helpful, but this files are not part of the final project.
+- **main_script.py**: this file includes the ejecutable part and is related with all modules files.
  
 
  ## **🧩 Modules:**
