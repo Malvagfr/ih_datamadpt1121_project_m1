@@ -1,98 +1,79 @@
 <p align="left"><img src="https://cdn-images-1.medium.com/max/184/1*2GDcaeYIx_bQAZLxWM4PsQ@2x.png"></p>
 
 
-
-# __ih_datamadpt1121_project_m1__
+# __Access to Madrid Monuments using BiciMAD 🏛 🚴__
 
 - This project is part of Ironhack Madrid - Data Analytics Part Time - November 2021 - Project Module 1
 
-- The project is about calculating the nearest BiciMad station to different Interesting Points in Madrid city
+- The project is a Real time Python App that calculates nearest BiciMAD station to most important monuments in Madrid City
 
-## **Objectives:**
+## **🎯 Objectives:**
+Provide the user with to the nearest BiciMAD station to different monuments of Madrid City ,so they:
+- Know in real time which is the nearest BiciMAD station to a specific monument they input or to all important monument in Madrid City.
+- Know if the station has free bikes or free bases to left the bike.
+- Have all addresses and the distances in meters.
+
+By using a python app (data pipeline) for getting all data sources and provide results in real time.
 
 
-## **Data:**
+## **👩🏻‍💻 Resources:**
+- Python 3.7 and libraries ([Pandas](https://pandas.pydata.org/pandas-docs/stable/reference/index.html), [Requests](https://requests.readthedocs.io/),[fuzzywuzzy](https://pypi.org/project/fuzzywuzzy/), geometry, geopandas, [Argparse](https://docs.python.org/3.7/library/argparse.html) and tabulate)
+- Access to [Madrid City Monument official data](https://datos.madrid.es/nuevoMadrid/swagger-ui-master-2.2.10/dist/index.html?url=/egobfiles/api.datos.madrid.es.json#!/Monumentos32de32la32ciudad32de32Madrid/monumentos_ciudad_madrid_json) (through API)
+- Access to [EMT BiciMAD official data](https://mobilitylabs.emtmadrid.es/sip/es/oauth/register?client_id=f2f08cad-4c18-4538-ae18-11da67819299&redirect_uri=aHR0cHM6Ly9tb2JpbGl0eWxhYnMuZW10bWFkcmlkLmVzL2Rlc2EvZXMvbG9naW4vYXV0aG9yaXplZA==&scope=&context=cG9ydGFs) (through API)
 
-There are 2 main datasources:
+> __IMPORTANT =>__ It is needed to create an account for using EMT BiciMAD official data
 
-- **Azure SQL Database.** The database contains information from the BiciMAD stations including their location (i.e.: latitude / longitude). In order to access the database you may need the following credentials:
+## **👤 User experience:**
+2 options for the end user:
+- all_points: provides a list with all interest points and the nearest bicimad station (also with the distance, both addresses and number of free bikes and free bases).
+- specific_point: gets a interest point provided by the user and returns the interest points with similar title (depending on the user accurate this can return more than one place or even none). Again with the nearest bicimad station (also with the distance, both addresses and number of free bikes and free bases).
+
+- They get a table like the following and a csv stored in data/results folder:
+
+| Place of interest | Type of place | Place address | BiciMAD station | Station location |  distance(m) | free bikes |  free bases |
+|---------|----------|-------|------------|----------|-------|------------|----------|
+| A los abuelos  | Monumentos de la ciudad de Madrid | C Alicún | Manuel Caldeiro | Paseo de la Castellana nº 298 |2633.11 |  9 |  15 |
+
+## **🗄 Folder structure:**
 ```
-Server name:   sqlironhack
-Database:      BiciMAD
-```
-> __IMPORTANT =>__ Username and password will be provided in class.
+ └── project
+    ├── .gitignore
+    ├── README.md
+    ├── main_script.py
+    ├── notebooks
+    │   ├── nearest_BiciMAD_station_calculation.ipynb
+    │   └── near_BiciMAD_calculation_functions.ipynb
+    ├── modules
+    │   ├── data_adquisition.py
+    │   └── data_transformation.py
+    │   └── filter_by_interest_point.py
+    │   └── geo_calculations.py
+    └── data
+        ├── raw
+        ├── processed
+        └── results
+ ```
+
+ ## **🧩 Modules:**
+- data_acquisition: gets information from APIS, cleans it and does some calculations.
+- filter_by_interest_point: gets the point of interest the user indicates and provide the point of interests information (name, address, latitude, longitude…) for the most similar one/ones.
+- data_transformation: calculates the distance of each interest point to each BiciMAD stations and provides the result with the nearest BiciMAD station.
+- geo_calculation: applies specific functions for calculating coordinates in degrees and distance between 2 points in meters.
 
 
-- **API REST.** We will use the API REST from the [Portal de datos abiertos del Ayuntamiento de Madrid](https://datos.madrid.es/nuevoMadrid/swagger-ui-master-2.2.10/dist/index.html?url=/egobfiles/api.datos.madrid.es.json#/), where you can find the __Catálogo de datos__ with more than 70 datasets.
+## ** 👑 Main script -Functions flow:**
+**all_points:**
+- get_bicimad_info
+- get_interest_points_info
+- get_interest_points_info_coordinades
+- get_near_station
 
-> __IMPORTANT =>__ Specific datasets will be assigned to each student in order to perform the challenges.
-
-
----
-
-## **Main Challenge:**
-
-You must create a Python App (**Data Pipeline**) that allow their potential users to find the nearest BiciMAD station to a set of places of interest. The output table should look similar to:
-
-| Place of interest | Type of place (*) | Place address | BiciMAD station | Station location |
-|---------|----------|-------|------------|----------|
-| Auditorio Carmen Laforet (Ciudad Lineal)   | Centros Culturales | Calle Jazmin, 46 | Legazpi | Calle Bolívar, 3 |
-| Centro Comunitario Casino de la Reina | Centros municipales de enseñanzas artísticas | Calle Casino, 3 | Chamartin | Calle Rodríguez Jaén, 40 |
-| ...     | ...            | ...        | ...      | ...        |
-> __(*)__ There is a list of datasets each one with different places. A specific dataset will be assigned to each student. 
-
-
-**Your project must meet the following requirements:**
-
-- It must be contained in a GitHub repository which includes a README file that explains the aim and content of your code. You may follow the structure suggested [here](https://github.com/potacho/data-project-template).
-
-- It must create, at least, a `.csv` file including the requested table (i.e. Main Challenge). Alternatively, you may create an image, pdf, plot or any other output format that you may find convenient. You may also send your output by e-mail, upload it to a cloud repository, etc. 
-
-- It must provide, at least, two options for the final user to select when executing using `argparse`: **(1)** To get the table for every 'Place of interest' included in the dataset (or a set of them), **(2)** To get the table for a specific 'Place of interest' imputed by the user.
-
-**Additionally:**
-
-- You must prepare a 4 minutes presentation (ppt, canva, etc.) to explain your project (Instructors will provide further details about the content of the presentation).
-
-- The last slide of your presentation must include your candidate for the **'Ironhack Data Code Beauty Pageant'**. 
-
-
----
-
-### **Bonus 1:**
-
-You may include in your table the availability of bikes in each station.
-
----
-
-### **Bonus 2:**
-
-You may improve the usability of your app by using [FuzzyWuzzy](https://pypi.org/project/fuzzywuzzy/).
-
----
-
-### **Bonus 3:**
-
-Feel free to enrich your output data with any data you may find relevant (e.g.: wiki info for every place of interest).
-
---- 
-
-## **Project Main Stack**
-
-- [Azure SQL Database](https://portal.azure.com/)
-
-- [SQL Alchemy](https://docs.sqlalchemy.org/en/13/intro.html) (alternatively you can use _Azure Data Studio_)
-
-- [Requests](https://requests.readthedocs.io/)
-
-- [Pandas](https://pandas.pydata.org/pandas-docs/stable/reference/index.html)
-
-- Module `geo_calculations.py`
-
-- [Argparse](https://docs.python.org/3.7/library/argparse.html)
-
-
-
+**specific_point:** 
+- get_bicimad_info
+- get_interest_points_info
+- get_specific_interest_point (filtering first the dataframe)
+- get_interest_points_info_coordinades
+- get_near_station
 
 
 

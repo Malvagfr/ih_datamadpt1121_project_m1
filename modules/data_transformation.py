@@ -18,7 +18,7 @@ def get_interest_points_info_coordinades(dataframe):
     dataframe.drop(['long_start','lat_start'], axis=1, inplace=True)
 
     #Storing dataframe
-    dataframe.to_csv('./data/interest_points_clean.csv')
+    dataframe.to_csv('./data/processed/interest_points_clean.csv')
     interest_points_coordinades=dataframe
     return interest_points_coordinades
 
@@ -29,7 +29,7 @@ def get_near_station(bicimad_stations,dataframe):
     #Joining data
     interest_points_bicimad = bicimad_stations.assign(key=0).merge(dataframe.assign(key=0), how='left', on = 'key')
     interest_points_bicimad.drop('key', axis=1, inplace=True)
-    interest_points_bicimad.to_csv('./data/interest_points_bicimad.csv')
+    interest_points_bicimad.to_csv('./data/processed/interest_points_bicimad.csv')
 
     #Calculating coordinades
     distance=interest_points_bicimad.apply(lambda x: geo.distance_meters(x['coordinates_interest_points'],x['coordinates_bicimad']), axis=1)
@@ -53,5 +53,5 @@ def get_near_station(bicimad_stations,dataframe):
     nearest_BiciMAD_station['distance(m)']=nearest_BiciMAD_station['distance(m)'].round(2)
 
     #Saving CSV
-    nearest_BiciMAD_station.to_csv('./data/nearest_BiciMAD_station.csv')
+    nearest_BiciMAD_station.to_csv('./data/results/nearest_BiciMAD_station.csv')
     return nearest_BiciMAD_station
