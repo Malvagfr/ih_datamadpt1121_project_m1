@@ -5,10 +5,10 @@
 
 - This project is part of Ironhack Madrid - Data Analytics Part Time - November 2021 - Project Module 1
 
-- The project is a Real time Python App that calculates nearest BiciMAD station to most important monuments in Madrid City
+- This project is a Real time Python App that calculates nearest BiciMAD station to most important monuments in Madrid City
 
 ## **🎯 Objectives:**
-Provide the user with to the nearest BiciMAD station to different monuments of Madrid City ,so they:
+Provide the user with to the nearest BiciMAD station to different monuments of Madrid City, so they:
 - Know in real time which is the nearest BiciMAD station to a specific monument they input or to all important monument in Madrid City.
 - Know if the station has free bikes or free bases to left the bike.
 - Have all addresses and the distances in meters.
@@ -25,14 +25,18 @@ By using a python app (data pipeline) for getting all data sources and provide r
 
 ## **👤 User experience:**
 2 options for the end user:
-- all_points: provides a list with all interest points and the nearest bicimad station (also with the distance, both addresses and number of free bikes and free bases).
-- specific_point: gets a interest point provided by the user and returns the interest points with similar title (depending on the user accurate this can return more than one place or even none). Again with the nearest bicimad station (also with the distance, both addresses and number of free bikes and free bases).
+- **all_points**: provides a list with all interest points and the nearest bicimad station (also with the distance, both addresses and number of free bikes and free bases).
+- **specific_point**: gets a interest point provided by the user and returns the interest points with similar title (depending on the user accurate this can return more than one place or even none). Again with the nearest bicimad station (also with the distance, both addresses and number of free bikes and free bases).
 
-- They get a table like the following and a csv stored in data/results folder:
+-  They need to include *python main_script.py -h* for the help and *python main_script.py -h <<option>>* for executing the program.
+
+- They get a table like the following and a csv stored in data/results folder: *
 
 | Place of interest | Type of place | Place address | BiciMAD station | Station location |  distance(m) | free bikes |  free bases |
 |---------|----------|-------|------------|----------|-------|------------|----------|
 | A los abuelos  | Monumentos de la ciudad de Madrid | C Alicún | Manuel Caldeiro | Paseo de la Castellana nº 298 |2633.11 |  9 |  15 |
+
+* This example is for **specific_point** option 
 
 ## **🗄 Folder structure:**
 ```
@@ -54,14 +58,20 @@ By using a python app (data pipeline) for getting all data sources and provide r
         └── results
  ```
 
+- data: for storing intermediate and final data (in csv so it’s easy to access, storing intermediate data is helpful for testing purposes.)
+- modules: includes python scripts where functions are defined.
+- notebooks: sometimes using jupyter notebook for developing is helpful, but this files are not part of the final project.
+- main_script.py: this file includes the ejecutable part and is related with all modules files.
+ 
+
  ## **🧩 Modules:**
-- data_acquisition: gets information from APIS, cleans it and does some calculations.
-- filter_by_interest_point: gets the point of interest the user indicates and provide the point of interests information (name, address, latitude, longitude…) for the most similar one/ones.
-- data_transformation: calculates the distance of each interest point to each BiciMAD stations and provides the result with the nearest BiciMAD station.
-- geo_calculation: applies specific functions for calculating coordinates in degrees and distance between 2 points in meters.
+- **data_acquisition**: gets information from APIS, cleans it and does some calculations.
+- **filter_by_interest_point**: gets the point of interest the user indicates and provide the point of interests information (name, address, latitude, longitude…) for the most similar one/ones.
+- **data_transformation**: calculates the distance of each interest point to each BiciMAD stations and provides the result with the nearest BiciMAD station.
+- **geo_calculation**: applies specific functions for calculating coordinates in degrees and distance between 2 points in meters.
 
 
-## ** 👑 Main script -Functions flow:**
+## **👑 Main script -Functions flow:**
 **all_points:**
 - get_bicimad_info
 - get_interest_points_info
