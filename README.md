@@ -42,6 +42,7 @@ By using a python app (data pipeline) for getting all data sources and provide r
 ```
  └── project
     ├── .gitignore
+    ├── requirements.txt
     ├── README.md
     ├── main_script.py
     ├── notebooks
