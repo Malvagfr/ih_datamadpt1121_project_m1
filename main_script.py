@@ -12,10 +12,11 @@ from modules import data_adquisition as ad
 from modules import filter_by_interest_point as fi
 from modules import data_transformation as tr
 
+
 # import libraries
 import argparse                         #allow users to select multiple functionalities
 from tabulate import tabulate           #for nice displaying by console
- 
+import warnings
 
 ###################################################### Argument parser function ##############################################
 #allow users to select between 2 different functionalities
@@ -31,7 +32,7 @@ def argument_parser():
 ###################################################### Main pipeline function ################################################
 def main(arguments):
     print('----------------------- 1. starting application -----------------------')
-
+    warnings.filterwarnings("ignore")
     if arguments.function == 'all_points':
         bicimad_info=ad.get_bicimad_info()
         interest_points=ad.get_interest_points_info()
